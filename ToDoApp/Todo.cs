@@ -13,11 +13,6 @@ namespace ToDoApp
 {
     public static class Todo
     {
-        public class ToDoItem : TableEntity
-        {
-            public string Name { get; set; }
-        }
-
         [FunctionName("GetTodos")]
         public static List<ToDoItem> GetTodos([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "todos")]HttpRequestMessage req, [Table("todos")]IQueryable<ToDoItem> table, TraceWriter log)
         {
@@ -70,7 +65,7 @@ namespace ToDoApp
 
         [FunctionName("QueueOutput")]
         [return: Queue("queue1")]
-        public static string QueueOutput([HttpTrigger] dynamic input, TraceWriter log)
+        public static string QueueOutput([HttpTrigger] string input, TraceWriter log)
         {
             return input;
         }
